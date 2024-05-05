@@ -9,7 +9,10 @@ This project focuses on creating a robot capable of cleaning a room using grid s
 To get started with the project, follow these steps:
 
 ### 1.Setting up the robot
-
+- **Create 3 Roomba**: Educational vaccum robot.
+- **Raspberry Pi 4**: Single-board computer for controlling the robot and place to write codes. Recommend download Ubuntu 22.04 for this project.
+- **RPLiDAR**: LiDar camera for mapping and localization tasks.
+  
 ### 2.Installing related softwares
 
 Follow this instructions for installation:
