@@ -33,7 +33,8 @@ var NAVTREE =
         [ "Build Nav2: Once the dependencies are installed, you can build Nav2 using colcon, the ROS 2 build too...", "install.html#sub2", null ],
         [ "Source the Workspace: After building Nav2, source the workspace to make the Nav2 packages available i...", "install.html#sub3", null ]
       ] ],
-      [ "Clone our Repository", "install.html#Code", null ]
+      [ "Clone our Repository", "install.html#Code", null ],
+      [ "Run our code", "install.html#Run", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],

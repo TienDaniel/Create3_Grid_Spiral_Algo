@@ -110,6 +110,7 @@ $(function(){initNavTree('install.html',''); initResizable(); });
 </ul>
 </li>
 <li class="level1"><a href="#Code">Clone our Repository</a></li>
+<li class="level1"><a href="#Run">Run our code</a></li>
 </ul>
 </div>
 <div class="textblock"><h1><a class="anchor" id="Ros2"></a>
@@ -137,6 +138,13 @@ Source the Workspace: After building Nav2, source the workspace to make the Nav2
 </pre><h1><a class="anchor" id="Code"></a>
 Clone our Repository</h1>
 <pre class="fragment">git clone -b https://github.com/TienDaniel/Create3_Grid_Spiral_Algo.git
+</pre> <h1><a class="anchor" id="Run"></a>
+Run our code</h1>
+<pre class="fragment">1. ros2 launch create3_lidar_slam sensors_launch.py
+2. ros2 launch create3_lidar_slam rviz_launch.py
+3. ros2 launch nav2_bringup localization_launch.py map:=&lt;the path to your map&gt; use_sim_time:=false
+4. ros2 launch nav2_bringup navigation_launch.py use_sim_time:=false map_subscribe_transient_local:=true
+5. ros2 run my_robot_controller waypoint_spiral
 </pre> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
