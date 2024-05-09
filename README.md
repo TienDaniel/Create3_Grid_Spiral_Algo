@@ -49,16 +49,9 @@ sudo apt install ros-humble-rmw-cyclonedds-cpp
 ```
 
 ### 3.Running the Project
-Get coordinates of any waypoint from the map on RVIZ app. After that, clone the project into your directory/ work space:
-```bash
-   git clone https://github.com/TienDaniel/Create3_Grid_Spiral_Algo.git
-   ```
+You can access to our website to look up for directions on how to run the codes and other related materials:
+[CLick here](https://tiendaniel.github.io/Create3_Grid_Spiral_Algo/)
 
-Download VSCode for your computer (Rasberry pi), then go into your work space and open the code using this command below, 
-```bash
-   cd <your_work_space_ws>/src
-   code .
-   ```
 Then, put waypoints' coordinates into the code like here:
 ![image](https://github.com/TienDaniel/Create3_Grid_Spiral_Algo/assets/168886746/8e4a8458-2219-4e32-951c-1fbf92f3ecfe)
 
