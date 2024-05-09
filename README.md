@@ -49,7 +49,8 @@ sudo apt install ros-humble-rmw-cyclonedds-cpp
 ```
 
 ### 3.Running the Project
-You can access to our website to look up for directions on how to run the codes and other related materials:
+
+You can access to our website to look up for directions on how to run the codes and other related materials: 
 [CLick here](https://tiendaniel.github.io/Create3_Grid_Spiral_Algo/)
 
 Then, put waypoints' coordinates into the code like here:
@@ -61,14 +62,5 @@ colcon build --symlink-install
 source ~/your_work_space_ws/install/setup.bash
 ```
 
-Start the robot in spiral mode to clean the room.The robot will stop and navigate to the next waypoint whenever it encounters an obstacle, repeating the spiral cleaning process until all waypoints are visited.
-Go back to your work space from /src:
-```bash
-   cd ..
-  ```
-Run the robot:
-```bash
-   ros2 run 
-  ```
 ### 4.Contributing
 Contributions and feedback are welcome! Fork the repository, make your changes, and submit a pull request.
