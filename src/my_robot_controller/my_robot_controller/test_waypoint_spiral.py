@@ -26,8 +26,6 @@ def is_front_hazard_active(hazards): #Returns T/F if a hazard is detected
 
 
 class MoveToPoints(Node):
-
-
    def __init__(self, waypoints: list[PoseStamped]):
            super().__init__("move_to_points")
 
@@ -59,59 +57,10 @@ class MoveToPoints(Node):
            self.get_logger().info("MoveToPoints has been started")
            # self.move(False)
 
-
-   # Rotate 90 degrees with this fuction
-   def rotate(self):
-        twist = Twist()
-
-
-
-
-        angular_speed = 15*2*pi/360 #rotate x = 15 degrees/sec (rad/s) -> will finish around 6 - 8 seconds
-        relative_angle = 90*2*pi/360 #90 degrees (rad)
-
-
-
-
-        twist.linear.x = 0.0
-        twist.linear.y = 0.0
-        twist.linear.z = 0.0
-        twist.angular.x = 0.0
-        twist.angular.y = 0.0
-        twist.angular.z = angular_speed
-
-
-
-
-        t0 = self.get_clock().now().seconds_nanoseconds()[0]
-        current_angle = 0.0
-
-
-
-
-        while (current_angle <= relative_angle):
-            self.publisher.publish(twist) #publish to continue to send angular.z = 15 degree for the next loop
-            t1 = self.get_clock().now().seconds_nanoseconds()[0]
-            duration_sec = t1 - t0
-            current_angle = angular_speed * duration_sec
-            self.get_logger().info(f'Rotate @ duration: {duration_sec} seconds out of {self.next_publish_duration}')
-
-
-
-
-        #force robot to stop
-        twist.angular.z = 0.0
-        self.publisher.publish(twist) #publish the new angular.z=0 to stop robot
-
-
-
-
-   # Move forward
+   # Adjust the codes to adapt to our ideas from this source https://wiki.ros.org/turtlesim/Tutorials/Moving%20in%20a%20Straight%20Line
+   # Move forward.
    def move_forward(self):
        twist = Twist()
-
-
-
 
        twist.linear.x = self.speed_forward # 0.2m/s forward
        twist.linear.y = 0.0
@@ -124,9 +73,6 @@ class MoveToPoints(Node):
        current_distance = 0.0
        distance = self.desire_distance #distance robot needs to finish
 
-
-
-
        while (current_distance < distance):
            self.publisher.publish(twist) # publish to continue to send linear.x = 0.2 for the next loop
            t1 = self.get_clock().now().seconds_nanoseconds()[0]
@@ -134,53 +80,64 @@ class MoveToPoints(Node):
            current_distance = self.speed_forward * duration_sec
            self.get_logger().info(f'Move -> duration: within {duration_sec} seconds out of {self.next_publish_duration}')
 
-
-
-
        #force robot to stop
        twist.linear.x = 0.0
        self.publisher.publish(twist) #publish the new linear.x = 0 to stop robot
 
 
+   # Rotate 90 degrees with this fuction. 
+   def rotate(self):
+        twist = Twist()
+
+        angular_speed = 15*2*pi/360 #rotate x = 15 degrees/sec (rad/s) -> will finish around 6 - 8 seconds
+        relative_angle = 90*2*pi/360 #90 degrees (rad)
+
+        twist.linear.x = 0.0
+        twist.linear.y = 0.0
+        twist.linear.z = 0.0
+        twist.angular.x = 0.0
+        twist.angular.y = 0.0
+        twist.angular.z = angular_speed
+
+        t0 = self.get_clock().now().seconds_nanoseconds()[0]
+        current_angle = 0.0
+
+        while (current_angle <= relative_angle):
+            self.publisher.publish(twist) #publish to continue to send angular.z = 15 degree for the next loop
+            t1 = self.get_clock().now().seconds_nanoseconds()[0]
+            duration_sec = t1 - t0
+            current_angle = angular_speed * duration_sec
+            self.get_logger().info(f'Rotate @ duration: {duration_sec} seconds out of {self.next_publish_duration}')
+
+        #force robot to stop
+        twist.angular.z = 0.0
+        self.publisher.publish(twist) #publish the new angular.z=0 to stop robot
+
+   
        # Spiral pattern
    def move_spiral_pattern(self):   
        if self.state == "move_forward":
            self.check_rotation = self.check_rotation + 1
            self.move_forward()
 
-
-
-
            if self.check_rotation == 2:
                self.desire_distance = self.desire_distance + 0.4 # add +0.4m every 2 rotations, 0.4m is the width of the robot
                self.check_rotation = 0
 
-
-
-
            self.state = "rotate" #change state to rotate after every moving forward
            self.next_publish_duration = 8.0 #8.0 seconds is enough for robot to finish a rotation
-
-
-
 
        else: #when self.state == "rotate"
            self.rotate()
            self.state = "move_forward" #change back to move forward after every rotation
-
-
-
 
            #calculate next_publish_duration for robot moving forward
            publish_duration = (self.desire_distance / self.speed_forward) + 2.0 # time = (distance/speed) + 2.0 seconds for errors
           
            #  if(publish_duration > 8.0)
            self.next_publish_duration = publish_duration    
+
    
-
-
-  
-  
    def hazard_callback(self, hazards: HazardDetectionVector):
           
        if (is_front_hazard_active(hazards) and self.count < 3):
