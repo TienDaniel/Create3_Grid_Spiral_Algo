@@ -46,17 +46,17 @@ sudo apt install ros-humble-rmw-cyclonedds-cpp
 #### Set up work space
 We're using [Python](https://www.how2shout.com/linux/install-python-3-9-or-3-8-on-ubuntu-22-04-lts-jammy-jellyfish/#:~:text=Steps%20to%20install%20Python%203.9%20or%203.8%20on,...%207%207.%20Uninstall%20Python%20and%20PPA%20) and code on [VSCode](https://linuxiac.com/install-visual-studio-code-on-ubuntu-22-04/) for this project.
 
-Create work space for your project, you can name 'my_ws' below any names that you like
+Create work space for your project, you can rename 'my_ws' below any names that you like
 ```bash
 mkdir my_ws
 ```
 
-Then, move direction into your work space directory, 'my_ws' in this case or any name of work space that you name above
+Then, move to your work space directory 'my_ws' or any name of work space that you renamed above
 ```bash
 cd my_ws
 ```
 
-Now, you're in your work space, clone our project by this command:
+Now, you're in your work space, clone our Github project by this command:
 ```bash
 git clone https://github.com/TienDaniel/Create3_Grid_Spiral_Algo
 ```
