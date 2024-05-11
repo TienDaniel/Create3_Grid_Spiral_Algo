@@ -99,6 +99,7 @@ source ~/your_work_space_ws/install/setup.bash
 
 #### Run the robot
 Make sure you don't turn off the RVIZ. Because we need it to set the initial waypoint for the robot using '2D Pose Estimate' on the tool bar like image below. You need to approximately identify the position of your robot on the map by your eyes, then drag and drop the green arrow point to the direction where your robot is facing (where bumper is facing).
+
 ![2D_pose_estimate](https://github.com/TienDaniel/Create3_Grid_Spiral_Algo/assets/168886746/d29c1b6e-1172-4575-8530-deb9441df746)
 
 Then, you run these 3 command lines below, you can check up installation in our website for these commands:
