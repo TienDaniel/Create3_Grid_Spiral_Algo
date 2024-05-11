@@ -20,10 +20,10 @@ Follow this instructions for installation:
 - [Installing SLAM Toolbox](#installing-slam-toolbox)
 - [Installing Navigation 2](#installing-navigation-2)
 
-#### Installing ROS2
+#### *Installing ROS2*
 ROS 2, or Robot Operating System 2, is an open-source robotics middleware framework. It provides libraries and tools to help developers build robot applications. Check instruction [here](https://iroboteducation.github.io/create3_docs/setup/ubuntu2204/).
 
-#### Installing SLAM Toolbox
+#### *Installing SLAM Toolbox*
 Next, we need to install SLAM Stoolbox:
 ```bash
 sudo apt install ros-humble-slam-toolbox
@@ -31,7 +31,7 @@ sudo apt install ros-humble-slam-toolbox
 
 And read [here](https://github.com/iRobotEducation/create3_examples/tree/humble/create3_lidar_slam) to know how to use Lidar to scan the map.
 
-#### Installing Navigation 2
+#### *Installing Navigation 2*
 Install NAV2 package:
 ```bash
 sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup
@@ -43,7 +43,7 @@ sudo apt install ros-humble-rmw-cyclonedds-cpp
 ```
 
 ### 3.Running the Project
-#### Set up work space
+#### *Set up work space*
 We're using [Python](https://www.how2shout.com/linux/install-python-3-9-or-3-8-on-ubuntu-22-04-lts-jammy-jellyfish/#:~:text=Steps%20to%20install%20Python%203.9%20or%203.8%20on,...%207%207.%20Uninstall%20Python%20and%20PPA%20) and code on [VSCode](https://linuxiac.com/install-visual-studio-code-on-ubuntu-22-04/) for this project.
 
 Create work space for your project, you can rename 'my_ws' below any names that you like
@@ -73,7 +73,7 @@ colcon build --symlink-install
 source ~/my_ws/install/setup.bash
 ```
 
-#### Set up waypoints
+#### *Set up waypoints*
 After successfully scan the room with SLAM Toolbox, you will see the map show up on RVIZ. Then using 'Publish Point' on the tool bar like image below, hovering it to any location that you want on the map and you will see the cooridinates showing up as (x,y,z) form in the bottom left corner of RVIZ. Then you can write these down on papers or somewhere, take 3 decimals after the point.
 ![image](https://github.com/TienDaniel/Create3_Grid_Spiral_Algo/assets/168886746/38bf9f8e-e3c4-45f3-afce-ce361b31fe28)
 
@@ -97,7 +97,7 @@ colcon build --symlink-install
 source ~/your_work_space_ws/install/setup.bash
 ```
 
-#### Run the robot
+#### *Run the robot*
 Make sure you don't turn off the RVIZ. Because we need it to set the initial waypoint for the robot using '2D Pose Estimate' on the tool bar like image below. You need to approximately identify the position of your robot on the map by your eyes, then drag and drop the green arrow point to the direction where your robot is facing (where bumper is facing).
 
 ![2D_pose_estimate](https://github.com/TienDaniel/Create3_Grid_Spiral_Algo/assets/168886746/d29c1b6e-1172-4575-8530-deb9441df746)
