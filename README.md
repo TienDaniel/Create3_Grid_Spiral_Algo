@@ -61,7 +61,7 @@ Now, you're in your work space, clone our project by this command:
 git clone https://github.com/TienDaniel/Create3_Grid_Spiral_Algo
 ```
 
-After that, we will just keep the file 'src' and you can delete other irrelevant files manually or by using commands below. It will delete 'docs' folder and 'README.md' file:
+After that, we just need 'src' file. We can delete other irrelevant files manually or by using commands below. It will delete 'docs' folder and 'README.md' file:
 ```bash
 rm -rf /docs
 rm -r /README.md
