@@ -15,13 +15,13 @@ from rclpy.executors import MultiThreadedExecutor
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup, ReentrantCallbackGroup
 from math import pi
 
-
+#-------- Daniel-------------
 def is_front_hazard_active(hazards): #Returns T/F if a hazard is detected
    for detection in hazards.detections:
        if (detection.type != 0):
            return True
        return False
-
+#-----------------------------
 
 class MoveToPoints(Node):
    def __init__(self, waypoints: list[PoseStamped]):
@@ -29,12 +29,9 @@ class MoveToPoints(Node):
 
 
            self.nav = BasicNavigator() # --start up navigator + setup waypoints--
-           self.nav.waitUntilNav2Active # ---------------------------------------
-           self.waypoints = waypoints #  ----------------------------------------
+           self.nav.waitUntilNav2Active 
+           self.waypoints = waypoints 
            self.count = 0
-        #    self.move_to_waypoint(waypoints[0])
-
-
            self.publisher = self.create_publisher(Twist, "/cmd_vel", 10) # --GRID SPIRAL IMPLEMENTATION --
            self.speed_forward = 0.2 #speed for moving forward
            self.desire_distance = 0.4 #Distance for moving forward, it increases every 2 rotation
@@ -44,7 +41,7 @@ class MoveToPoints(Node):
            self.callback = True
            self.tcallback = MutuallyExclusiveCallbackGroup()
            self.scallback = MutuallyExclusiveCallbackGroup()
-           self.timer = self.create_timer(self.next_publish_duration, self.move_spiral_pattern, callback_group=self.tcallback) # ----------
+           self.timer = self.create_timer(self.next_publish_duration, self.move_spiral_pattern, callback_group=self.tcallback) 
            self.timer.cancel()
           
            self.hazard_detected = False
@@ -55,7 +52,12 @@ class MoveToPoints(Node):
            self.get_logger().info("MoveToPoints has been started")
            # self.move(False)
 
-   # Adjust the codes to adapt to our ideas from this source https://wiki.ros.org/turtlesim/Tutorials/Moving%20in%20a%20Straight%20Line
+
+   # *********************************** Tien - start *****************************************************************
+   # Purpose of my codes: Creating spiral pattern using move_forward and rotation 90 degrees. 
+   # Using counter and state variables to signal the robot when to increase to make the spiral bigger. 
+   # Adjust the codes to adapt to spiral ideas from this source https://wiki.ros.org/turtlesim/Tutorials/Moving%20in%20a%20Straight%20Line
+   
    # Move forward.
    def move_forward(self):
        twist = Twist()
@@ -112,7 +114,7 @@ class MoveToPoints(Node):
         self.publisher.publish(twist) #publish the new angular.z=0 to stop robot
 
    
-       # Spiral pattern
+   # Spiral pattern
    def move_spiral_pattern(self):   
        if self.state == "move_forward":
            self.check_rotation = self.check_rotation + 1
@@ -134,10 +136,12 @@ class MoveToPoints(Node):
           
            #  if(publish_duration > 8.0)
            self.next_publish_duration = publish_duration    
+   #******************************** Tien - end ***********************************************************************
 
    
-   def hazard_callback(self, hazards: HazardDetectionVector):
-          
+   #---------------------- Daniel---start ---------------------------------------------------------------------------
+   # Purpose of my code: combining the spiral above with the waypoints and using bumper detection
+   def hazard_callback(self, hazards: HazardDetectionVector):       
        if (is_front_hazard_active(hazards) and self.count < 3):
            self.timer.cancel()
            self.move_to_waypoint(self.waypoints[self.count])
@@ -180,7 +184,7 @@ def create_pose_stamped(navigator, position_x, position_y, rotation_z):
    goal_pose.pose.orientation.z = q_z
    goal_pose.pose.orientation.w = q_w
    return goal_pose
-
+#------------------------------- Daniel - end -------------------------------------------------------------------------
 
 def main(args = None):
    # --- Init ROS2 communications and Simple Commander API ---
