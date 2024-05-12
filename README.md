@@ -102,7 +102,7 @@ Make sure you don't turn off the RVIZ. Because we need it to set the initial way
 
 ![2D_pose_estimate](https://github.com/TienDaniel/Create3_Grid_Spiral_Algo/assets/168886746/d29c1b6e-1172-4575-8530-deb9441df746)
 
-Then, you run these 5 command lines below, you can check up installation in our website for these commands. if you still keep the first two commands alive from the SLAM Toolbox above, we don't have to re-run it, you just need to run the last three commands.
+Then, you run these 5 command lines below, you can check up installation in our website for these commands. *** *Note: if you still keep the first two commands alive from the SLAM Toolbox above, we don't have to re-run it, you just need to run the last three commands.*
 ```bash
 ros2 launch create3_lidar_slam sensors_launch.py
 ```
