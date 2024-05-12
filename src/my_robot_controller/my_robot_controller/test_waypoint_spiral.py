@@ -56,6 +56,7 @@ class MoveToPoints(Node):
    # *********************************** Tien - start *****************************************************************
    # Purpose of my codes: Creating spiral pattern using move_forward and rotation 90 degrees. 
    # Using counter and state variables to signal the robot when to increase to make the spiral bigger. 
+   # Adjust the codes to what we need from this source wiki.ros.org/turtlesim/tutorials/moving in a straight line
    
    # Move forward.
    def move_forward(self):
