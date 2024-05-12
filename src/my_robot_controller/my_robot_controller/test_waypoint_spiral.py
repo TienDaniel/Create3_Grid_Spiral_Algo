@@ -16,8 +16,6 @@ from rclpy.callback_groups import MutuallyExclusiveCallbackGroup, ReentrantCallb
 from math import pi
 
 
-
-
 def is_front_hazard_active(hazards): #Returns T/F if a hazard is detected
    for detection in hazards.detections:
        if (detection.type != 0):
@@ -169,10 +167,6 @@ class MoveToPoints(Node):
            print(feedback)
 
 
-
-
-
-
 def create_pose_stamped(navigator, position_x, position_y, rotation_z):
    q_x, q_y, q_z, q_w = tf_transformations.quaternion_from_euler(0.0, 0.0, rotation_z)
    goal_pose = PoseStamped()
@@ -193,43 +187,21 @@ def main(args = None):
    rclpy.init(args=args)
    nav = BasicNavigator()
 
-
-   # --- Set initial pose ---
-   # !!! Comment if the initial pose is already set !!!
-   # initial_pose = create_pose_stamped(nav, 0.0, 0.0, 0.0)
-   #nav.setInitialPose(initial_pose)
-
-
    # --- Wait for Nav2 ---
    nav.waitUntilNav2Active()
-
 
    # --- Create some Nav2 goal poses ---
    goal_pose1 = create_pose_stamped(nav, -0.459, -1.49, 0.005)
    goal_pose2 = create_pose_stamped(nav, 0.643, -2.12, 0.005)
    goal_pose3 = create_pose_stamped(nav, 1.06, -3.11, 0.005)
 
-
-   # --- Going to one pose ---
-   # nav.goToPose(goal_pose1)
-   # while not nav.isTaskComplete():
-   #         feedback = nav.getFeedback()
-   #         # print(feedback)
-
-
    # --- Follow Waypoints ---
    waypoints = [goal_pose1, goal_pose2, goal_pose3]
-       # for i in range(3):
-       #     nav.followWaypoints(waypoints)
-       #     while not nav.isTaskComplete():
-       #         feedback = nav.getFeedback()
-       #     print(feedback)
+ 
    node = MoveToPoints(waypoints)
    executor = MultiThreadedExecutor()
    executor.add_node(node)
    executor.spin()
-   # --- Get the result ---
-   # print(nav.getResult())
 
    # --- Shutdown ROS2 communications ---
    rclpy.shutdown()
